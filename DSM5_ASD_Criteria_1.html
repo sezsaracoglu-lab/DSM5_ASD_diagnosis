@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSM-5 ASD — Diagnostic Criteria Study Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #171b26;
+  --surface2: #1e2334;
+  --border: #2a3048;
+  --border2: #3a4060;
+  --teal: #2ec4c4;
+  --teal-dim: #1a7a7a;
+  --teal-bg: #0d2f2f;
+  --amber: #f0a830;
+  --amber-dim: #8a5e10;
+  --amber-bg: #2a1e08;
+  --rose: #e05a7a;
+  --rose-dim: #7a2a3a;
+  --rose-bg: #2a0f18;
+  --violet: #9b7cf4;
+  --violet-dim: #4a3580;
+  --violet-bg: #1a1230;
+  --mint: #4ecb8e;
+  --mint-dim: #1e6040;
+  --mint-bg: #0a1e14;
+  --text: #e4e8f0;
+  --text-dim: #8892a8;
+  --text-muted: #545e74;
+  --a-color: #1a5c5c;
+  --b-color: #5c3a1a;
+  --sp-color: #3a1a5c;
+  --radius: 8px;
+  --radius-lg: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.header {
+  background: linear-gradient(135deg, #0a1428 0%, #0d2030 50%, #0a1828 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 0 30px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 300px at 20% 50%, rgba(46,196,196,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 200px at 80% 30%, rgba(155,124,244,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+}
+.header-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-tag::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--teal-dim), transparent);
+}
+h1 {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+h1 span { color: var(--teal); }
+.header-sub {
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 22px;
+  font-family: 'DM Mono', monospace;
+}
+
+/* threshold pill row */
+.threshold-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.threshold-pill {
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid;
+}
+.pill-a  { background: rgba(46,196,196,0.12); border-color: var(--teal-dim); color: var(--teal); }
+.pill-b  { background: rgba(240,168,48,0.12);  border-color: var(--amber-dim); color: var(--amber); }
+.pill-cd { background: rgba(155,124,244,0.12); border-color: var(--violet-dim); color: var(--violet); }
+
+/* controls bar */
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  color: var(--text-dim);
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  font-size: 12.5px;
+  font-family: 'DM Mono', monospace;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+.btn:hover { background: var(--border); color: var(--text); border-color: var(--teal-dim); }
+.counter {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.counter span { color: var(--teal); font-size: 15px; font-weight: 600; }
+
+/* ── MAIN LAYOUT ── */
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 28px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── ALERT BOX ── */
+.alert {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 13.5px;
+  color: var(--text-dim);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.alert-icon { color: var(--amber); flex-shrink: 0; margin-top: 2px; }
+
+/* ── DOMAIN HEADER ── */
+.domain-block { margin-top: 8px; }
+.domain-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border: 1px solid;
+  border-bottom: none;
+  position: relative;
+  overflow: hidden;
+}
+.domain-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background: repeating-linear-gradient(
+    45deg, currentColor 0, currentColor 1px, transparent 0, transparent 50%
+  );
+  background-size: 12px 12px;
+}
+.domain-a  .domain-header { background: var(--teal-bg);   border-color: var(--teal-dim);   color: var(--teal); }
+.domain-b  .domain-header { background: var(--amber-bg);  border-color: var(--amber-dim);  color: var(--amber); }
+.domain-sp .domain-header { background: var(--violet-bg); border-color: var(--violet-dim); color: var(--violet); }
+.domain-tx .domain-header { background: var(--mint-bg);   border-color: var(--mint-dim);   color: var(--mint); }
+
+.domain-letter {
+  font-family: 'DM Mono', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0.9;
+  width: 36px;
+  flex-shrink: 0;
+}
+.domain-info { flex: 1; }
+.domain-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+.domain-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 11.5px;
+  opacity: 0.8;
+}
+.domain-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 50px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+  opacity: 0.85;
+  background: rgba(0,0,0,0.3);
+}
+
+/* ── CRITERIA LIST ── */
+.criteria-list {
+  border: 1px solid;
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden;
+}
+.domain-a  .criteria-list { border-color: var(--teal-dim); }
+.domain-b  .criteria-list { border-color: var(--amber-dim); }
+.domain-sp .criteria-list { border-color: var(--violet-dim); }
+.domain-tx .criteria-list { border-color: var(--mint-dim); }
+
+/* ── CRITERION ITEM ── */
+.criterion {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  transition: background 0.15s;
+}
+.criterion:last-child { border-bottom: none; }
+.criterion.checked { background: #12191a; }
+
+.criterion-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.criterion-header:hover { background: rgba(255,255,255,0.02); }
+
+/* custom checkbox */
+.check-wrap {
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.check-wrap input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+.check-box {
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+  border: 1.5px solid var(--border2);
+  background: var(--surface2);
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.check-wrap input:checked ~ .check-box {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+.domain-b  .check-wrap input:checked ~ .check-box { background: var(--amber); border-color: var(--amber); }
+.domain-tx .check-wrap input:checked ~ .check-box { background: var(--mint);  border-color: var(--mint); }
+.check-box svg { opacity: 0; transform: scale(0.5); transition: all 0.15s; }
+.check-wrap input:checked ~ .check-box svg { opacity: 1; transform: scale(1); }
+
+/* criterion badge */
+.criterion-badge {
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 50px;
+  border: 1px solid;
+  margin-top: 3px;
+  white-space: nowrap;
+}
+.domain-a  .criterion-badge { color: var(--teal);   border-color: var(--teal-dim);   background: rgba(46,196,196,0.08); }
+.domain-b  .criterion-badge { color: var(--amber);  border-color: var(--amber-dim);  background: rgba(240,168,48,0.08); }
+.domain-sp .criterion-badge { color: var(--violet); border-color: var(--violet-dim); background: rgba(155,124,244,0.08); }
+.domain-tx .criterion-badge { color: var(--mint);   border-color: var(--mint-dim);   background: rgba(78,203,142,0.08); }
+
+.criterion-text { flex: 1; }
+.criterion-label {
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
+.criterion-summary {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* expand toggle */
+.expand-toggle {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  margin-top: 4px;
+  transition: transform 0.22s;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-family: 'DM Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.criterion-header:hover .expand-toggle { border-color: var(--border2); color: var(--text-dim); }
+.criterion.open .expand-toggle .arrow { transform: rotate(180deg); }
+.arrow { display: inline-block; transition: transform 0.22s; }
+
+/* hook panel */
+.hook-panel {
+  display: none;
+  padding: 0 18px 18px 52px;
+  animation: slideIn 0.2s ease;
+}
+.criterion.open .hook-panel { display: block; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+.hook-inner {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.hook-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 7px;
+}
+.hook-text {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+.hook-text strong { color: var(--text); font-weight: 600; }
+.hook-text .trap {
+  display: inline-block;
+  background: rgba(224,90,122,0.12);
+  border: 1px solid rgba(224,90,122,0.25);
+  color: var(--rose);
+  padding: 0 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'DM Mono', monospace;
+  margin-right: 4px;
+}
+.hook-text .new {
+  display: inline-block;
+  background: rgba(78,203,142,0.12);
+  border: 1px solid rgba(78,203,142,0.25);
+  color: var(--mint);
+  padding: 0 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'DM Mono', monospace;
+  margin-right: 4px;
+}
+.hook-text .key {
+  display: inline-block;
+  background: rgba(46,196,196,0.10);
+  border: 1px solid rgba(46,196,196,0.25);
+  color: var(--teal);
+  padding: 0 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'DM Mono', monospace;
+  margin-right: 4px;
+}
+
+/* ── EXAMPLES ROW ── */
+.examples-row {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.examples-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.examples-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  color: var(--text-dim);
+  padding: 3px 9px;
+  border-radius: 50px;
+}
+
+/* ── SEVERITY BANDS ── */
+.severity-section { margin-top: 8px; }
+.severity-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding: 0 2px;
+}
+.severity-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.sev-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.sev-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+.sev-1::before { background: var(--mint); }
+.sev-2::before { background: var(--amber); }
+.sev-3::before { background: var(--rose); }
+.sev-level {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+.sev-1 .sev-level { color: var(--mint); }
+.sev-2 .sev-level { color: var(--amber); }
+.sev-3 .sev-level { color: var(--rose); }
+.sev-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: var(--text);
+  line-height: 1.3;
+}
+.sev-desc {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+.sev-note {
+  margin-top: 7px;
+  padding-top: 7px;
+  border-top: 1px solid var(--border);
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── INFO CARDS ── */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+.info-card.full { grid-column: 1 / -1; }
+.info-card h3 {
+  font-size: 12.5px;
+  font-family: 'DM Mono', monospace;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.info-card strong { color: var(--text); }
+.info-card .highlight {
+  display: inline-block;
+  background: rgba(46,196,196,0.1);
+  border: 1px solid var(--teal-dim);
+  color: var(--teal);
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+}
+.info-card .removed {
+  display: inline-block;
+  background: rgba(224,90,122,0.1);
+  border: 1px solid var(--rose-dim);
+  color: var(--rose);
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+}
+.info-card .added {
+  display: inline-block;
+  background: rgba(78,203,142,0.1);
+  border: 1px solid var(--mint-dim);
+  color: var(--mint);
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+}
+
+/* ── COMPARISON TABLE (DSM-IV → DSM-5) ── */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 6px;
+}
+.compare-table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border2);
+  color: var(--text-dim);
+}
+.compare-table td {
+  padding: 10px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child { font-weight: 500; color: var(--text-muted); width: 28%; }
+.compare-table .old-val { color: var(--rose-dim); font-family: 'DM Mono', monospace; font-size: 12px; }
+.compare-table .new-val { color: var(--teal); font-family: 'DM Mono', monospace; font-size: 12px; }
+
+/* ── SPECIFIERS LIST ── */
+.spec-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+.spec-list li {
+  display: flex;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  align-items: flex-start;
+}
+.spec-list li::before {
+  content: '›';
+  color: var(--violet);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 15px;
+}
+.spec-list li strong { color: var(--text); }
+
+/* ── TREATMENT TABLE ── */
+.tx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin-top: 6px;
+}
+.tx-table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--mint-dim);
+  color: var(--mint);
+  background: rgba(78,203,142,0.05);
+}
+.tx-table td {
+  padding: 9px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+.tx-table tr:last-child td { border-bottom: none; }
+.tx-table td:first-child { font-weight: 600; color: var(--mint); font-family: 'DM Mono', monospace; font-size: 12px; width: 18%; }
+.tx-table td:nth-child(2) { color: var(--text-muted); font-size: 12px; width: 18%; }
+.tx-table strong { color: var(--text); }
+
+/* Attwood table */
+.attwood-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin-top: 6px;
+}
+.attwood-table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--violet-dim);
+  color: var(--violet);
+  background: rgba(155,124,244,0.05);
+}
+.attwood-table td {
+  padding: 9px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+  color: var(--text-dim);
+  font-size: 12.5px;
+}
+.attwood-table tr:last-child td { border-bottom: none; }
+.attwood-table td:first-child { font-weight: 600; color: var(--violet); font-family: 'DM Mono', monospace; font-size: 11.5px; width: 22%; }
+.attwood-table .fem-tag {
+  display: inline-block;
+  background: rgba(224,90,122,0.12);
+  border: 1px solid rgba(224,90,122,0.3);
+  color: var(--rose);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── SELF-TEST ── */
+.self-test {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 22px 18px;
+  margin-top: 8px;
+}
+.self-test-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.self-test-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.progress-bar-wrap {
+  width: 160px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--mint));
+  border-radius: 2px;
+  transition: width 0.35s ease;
+  width: 0%;
+}
+
+.test-items { display: flex; flex-direction: column; gap: 3px; }
+.test-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.12s;
+  user-select: none;
+  position: relative;
+}
+.test-item:hover { background: rgba(255,255,255,0.025); }
+.test-item.test-checked { background: rgba(46,196,196,0.04); }
+.test-item.test-checked.domain-b-item { background: rgba(240,168,48,0.04); }
+
+.test-check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  transition: all 0.15s;
+  background: var(--surface2);
+}
+.test-item.test-checked .test-check { background: var(--teal); border-color: var(--teal); }
+.test-item.test-checked.domain-b-item .test-check { background: var(--amber); border-color: var(--amber); }
+.test-check svg { opacity: 0; transition: opacity 0.15s; }
+.test-item.test-checked .test-check svg { opacity: 1; }
+
+.test-domain-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 50px;
+  border: 1px solid;
+  flex-shrink: 0;
+  margin-top: 3px;
+  white-space: nowrap;
+}
+.tag-a { color: var(--teal);   border-color: var(--teal-dim);   background: rgba(46,196,196,0.07); }
+.tag-b { color: var(--amber);  border-color: var(--amber-dim);  background: rgba(240,168,48,0.07); }
+
+.test-text {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  flex: 1;
+}
+.test-item.test-checked .test-text { color: var(--text-muted); }
+.test-text strong { color: var(--text); font-weight: 600; }
+
+.test-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 0;
+}
+
+/* bottom cert */
+.cert-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.cert-check-wrap { position: relative; width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; }
+.cert-check-wrap input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 2; }
+.cert-box {
+  position: absolute; inset: 0;
+  border-radius: 5px;
+  border: 1.5px solid var(--border2);
+  background: var(--surface2);
+  transition: all 0.18s;
+  display: flex; align-items: center; justify-content: center;
+}
+.cert-check-wrap input:checked ~ .cert-box { background: var(--mint); border-color: var(--mint); }
+.cert-box svg { opacity: 0; transform: scale(0.5); transition: all 0.15s; }
+.cert-check-wrap input:checked ~ .cert-box svg { opacity: 1; transform: scale(1); }
+.cert-text { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+.cert-text strong { color: var(--text); }
+
+/* ── MEMORY HOOK ── */
+.memory-hook {
+  background: linear-gradient(135deg, #0d2232, #0f1520);
+  border: 1px solid #1e3050;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-top: 8px;
+}
+.mem-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.mem-formula {
+  font-family: 'DM Mono', monospace;
+  font-size: 13.5px;
+  color: var(--teal);
+  line-height: 2;
+  letter-spacing: 0.02em;
+}
+.mem-formula .sep    { color: var(--text-muted); margin: 0 6px; }
+.mem-formula .part-a  { color: var(--teal); }
+.mem-formula .part-b  { color: var(--amber); }
+.mem-formula .part-sp { color: var(--violet); }
+.mem-formula .part-tx { color: var(--mint); }
+.mem-formula .part-note { color: var(--text-dim); font-size: 12px; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 18px 0 10px;
+  border-top: 1px solid var(--border);
+  max-width: 860px;
+  margin: 0 auto;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .severity-cards { grid-template-columns: 1fr; }
+  .info-grid { grid-template-columns: 1fr; }
+  .info-card.full { grid-column: 1; }
+  .hook-panel { padding-left: 18px; }
+}
+
+/* print */
+@media print {
+  body { background: #fff; color: #000; }
+  .header { background: #1a1a2e !important; }
+  .btn, .controls { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+  HEADER
+═══════════════════════════════════════ -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-tag">DSM-5-TR · APA 2022 · Davey 2021 · Powell 2021</div>
+    <h1><span>ASD</span> — Autistic Spectrum Disorder<br>Diagnostic Criteria</h1>
+    <div class="header-sub">Module 11 · Neurodevelopmental Disorders · EXAM STUDY SHEET</div>
+    <div class="threshold-row">
+      <div class="threshold-pill pill-a">Domain A — ALL 3 required</div>
+      <div class="threshold-pill pill-b">Domain B — ≥ 2 of 4 required</div>
+      <div class="threshold-pill pill-cd">Criteria C + D + E also required</div>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="expandAll()">Expand all hooks</button>
+      <button class="btn" onclick="collapseAll()">Collapse</button>
+      <button class="btn" onclick="clearChecks()">Clear checks</button>
+      <div class="counter"><span id="recall-count">0</span> / 7 recalled</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  MAIN CONTENT
+═══════════════════════════════════════ -->
+<div class="main">
+
+  <!-- ALERT -->
+  <div class="alert">
+    <span class="alert-icon">⚠</span>
+    <div>
+      <strong style="color: var(--text)">Minimum for diagnosis:</strong>
+      All 3 Domain A criteria <em>plus</em> at least 2 of 4 Domain B criteria <em>plus</em> Criteria C, D, and E — all must be present.
+      Severity is rated separately for Domain A and Domain B (Levels 1–3).
+    </div>
+  </div>
+
+  <!-- ════════════════════
+    DOMAIN A
+  ════════════════════ -->
+  <div class="domain-block domain-a">
+    <div class="domain-header">
+      <div class="domain-letter">A</div>
+      <div class="domain-info">
+        <div class="domain-title">Persistent deficits in social communication and social interaction</div>
+        <div class="domain-sub">Across multiple contexts — not explained by general developmental delay</div>
+      </div>
+      <div class="domain-badge">ALL 3 REQUIRED</div>
+    </div>
+    <div class="criteria-list">
+
+      <!-- A1 -->
+      <div class="criterion" id="cr-a1">
+        <div class="criterion-header" onclick="toggle('cr-a1')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">A1</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Deficits in social-emotional reciprocity</div>
+            <div class="criterion-summary">Abnormal social approach, failure of back-and-forth conversation, reduced sharing of interests or emotions</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>Reciprocity is the key word.</strong> Social interaction is not one-directional — it requires giving and receiving. A1 captures the failure of that fundamental exchange. In high-functioning ASD, the individual may <em>want</em> to interact but cannot sustain the back-and-forth rhythm of normal social conversation — they may monologue, talk at rather than with others, or fail to detect when a conversation has ended.<br><br>
+              This is distinct from shyness or introversion: the <strong>quality</strong> of social engagement is impaired, not just the quantity. Link to <strong>ToM deficit</strong>: without automatic mentalising, the individual cannot track the other person's mental state and adjust their behaviour accordingly — making reciprocal exchange extremely difficult.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">DSM-5 Examples</div>
+              <div class="examples-chips">
+                <span class="chip">Abnormal social approach</span>
+                <span class="chip">Failed back-and-forth conversation</span>
+                <span class="chip">Reduced sharing of interests</span>
+                <span class="chip">Failure to initiate / respond to social interaction</span>
+                <span class="chip">Reduced emotional sharing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- A2 -->
+      <div class="criterion" id="cr-a2">
+        <div class="criterion-header" onclick="toggle('cr-a2')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">A2</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Deficits in nonverbal communicative behaviours</div>
+            <div class="criterion-summary">Poorly integrated verbal/nonverbal comms, abnormal eye contact, deficits in gestures and facial expressions</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>Communication is more than words.</strong> A2 captures the nonverbal layer — the eye contact, body language, gestures, and facial expressions that neurotypical individuals use automatically and unconsciously. In ASD, verbal and nonverbal channels are <em>poorly integrated</em>: an individual may say appropriate words but with mismatched facial expression, or maintain eye contact without using it as an information channel.<br><br>
+              <span class="trap">EXAM TRAP</span> Poor eye contact alone is not diagnostic — it must be understood in context. Some autistic individuals learn to make eye contact through <strong>camouflaging</strong> and therefore appear to pass this criterion on surface observation. Probe <em>subjective experience</em>: does the eye contact feel natural or is it a learned performance?
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">DSM-5 Examples</div>
+              <div class="examples-chips">
+                <span class="chip">Poorly integrated verbal + nonverbal</span>
+                <span class="chip">Abnormal eye contact</span>
+                <span class="chip">Abnormal body language</span>
+                <span class="chip">Deficits in understanding gestures</span>
+                <span class="chip">Total absence of facial expression</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- A3 -->
+      <div class="criterion" id="cr-a3">
+        <div class="criterion-header" onclick="toggle('cr-a3')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">A3</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Deficits in developing, maintaining, and understanding relationships</div>
+            <div class="criterion-summary">Difficulties adjusting behaviour to social contexts, sharing imaginative play, making friends, absent interest in peers</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>Relationships require three distinct skills:</strong> (1) <em>developing</em> them — initiating appropriate contact; (2) <em>maintaining</em> them — sustaining them through reciprocal exchange over time; (3) <em>understanding</em> them — grasping the implicit rules and expectations of different relationship types. ASD can impair any or all three.<br><br>
+              This criterion also captures the <strong>context-adjustment failure</strong>: neurotypical individuals automatically modulate their behaviour depending on whether they are talking to a boss, a close friend, or a stranger. In ASD, this social code-switching is effortful or absent. Note: A3 does not require <em>absence of desire for friendship</em> — many autistic individuals desperately want friends but cannot successfully form or maintain relationships. Desire ≠ ability.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">DSM-5 Examples</div>
+              <div class="examples-chips">
+                <span class="chip">Difficulties adjusting to context</span>
+                <span class="chip">Difficulties sharing imaginative play</span>
+                <span class="chip">Problems making friends</span>
+                <span class="chip">Absent interest in peers</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /domain-a -->
+
+  <!-- ════════════════════
+    DOMAIN B
+  ════════════════════ -->
+  <div class="domain-block domain-b">
+    <div class="domain-header">
+      <div class="domain-letter">B</div>
+      <div class="domain-info">
+        <div class="domain-title">Restricted, repetitive patterns of behaviour, interests, or activities</div>
+        <div class="domain-sub">Manifested by at least 2 of the following — currently or by history</div>
+      </div>
+      <div class="domain-badge">≥ 2 OF 4</div>
+    </div>
+    <div class="criteria-list">
+
+      <!-- B1 -->
+      <div class="criterion" id="cr-b1">
+        <div class="criterion-header" onclick="toggle('cr-b1')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">B1</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Stereotyped or repetitive motor movements, use of objects, or speech</div>
+            <div class="criterion-summary">Simple motor stereotypies, lining up toys, echolalia, idiosyncratic phrases</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>Three modalities: body, objects, and speech.</strong> B1 spans stereotyped behaviour across all three. <em>Motor stereotypies</em> (hand-flapping, rocking, spinning) are the most visible. <em>Object stereotypies</em> (lining up toys rather than using them functionally) are diagnostically significant in young children. <em>Speech stereotypies</em> — particularly <strong>echolalia</strong> — involve immediate or delayed repetition of heard speech with no communicative function. <span class="new">DSM-5</span> explicitly includes speech stereotypies that were implicit in DSM-IV.<br><br>
+              <span class="trap">EXAM TRAP</span> Echolalia can sound like communication — the child may repeat what they have heard in what appears to be a contextually relevant way. Always probe whether the speech is <em>generated</em> or <em>reproduced</em>.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">DSM-5 Examples</div>
+              <div class="examples-chips">
+                <span class="chip">Simple motor stereotypies</span>
+                <span class="chip">Hand-flapping / rocking</span>
+                <span class="chip">Lining up toys</span>
+                <span class="chip">Echolalia</span>
+                <span class="chip">Idiosyncratic phrases</span>
+                <span class="chip">Pronoun reversal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- B2 -->
+      <div class="criterion" id="cr-b2">
+        <div class="criterion-header" onclick="toggle('cr-b2')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">B2</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Insistence on sameness, inflexible adherence to routines, ritualised patterns</div>
+            <div class="criterion-summary">Extreme distress at small changes, difficulties with transitions, rigid thinking patterns, greeting rituals</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>Sameness provides predictability, and predictability provides safety.</strong> From a cognitive perspective, B2 reflects the inability to tolerate uncertainty. For an individual with ASD whose social world is confusing and unpredictable, the imposition of rigid routines creates a controllable, interpretable environment. Disruptions to routine are therefore not trivial upsets but genuine threats to an organising structure.<br><br>
+              Link to <strong>Weak Central Coherence (WCC)</strong>: detail-focused processing may increase sensitivity to small environmental changes that neurotypical individuals would not consciously register. Link to <strong>Executive Function deficits</strong>: difficulty shifting cognitive set makes flexible adaptation to change extremely costly.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">DSM-5 Examples</div>
+              <div class="examples-chips">
+                <span class="chip">Extreme distress at small changes</span>
+                <span class="chip">Difficulties with transitions</span>
+                <span class="chip">Rigid thinking patterns</span>
+                <span class="chip">Greeting rituals</span>
+                <span class="chip">Same route every day</span>
+                <span class="chip">Same food</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- B3 -->
+      <div class="criterion" id="cr-b3">
+        <div class="criterion-header" onclick="toggle('cr-b3')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">B3</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Highly restricted, fixated interests — abnormal in intensity or focus</div>
+            <div class="criterion-summary">Strong attachment to unusual objects, excessively circumscribed or perseverative interests</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>The issue is intensity and focus, not topic.</strong> Many neurotypical individuals have special interests. In ASD, the interest is <em>abnormal in intensity</em> (consuming most of the individual's time, attention, and conversation) and/or <em>abnormal in focus</em> (the topic itself is unusual or the object of focus is atypical, such as drain covers, train timetables, or specific number sequences).<br><br>
+              B3 is directly linked to <strong>Baron-Cohen's Systematising theory</strong> — the drive to systemise, analyse, and explore rule-based patterns. The restricted interest is often the domain the individual most excels at systemising. This is a genuine <em>strength</em> as well as a diagnostic criterion: savant-level abilities frequently emerge from the same focused processing style.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">DSM-5 Examples</div>
+              <div class="examples-chips">
+                <span class="chip">Strong attachment to unusual objects</span>
+                <span class="chip">Excessively circumscribed interests</span>
+                <span class="chip">Perseverative interests</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- B4 -->
+      <div class="criterion" id="cr-b4">
+        <div class="criterion-header" onclick="toggle('cr-b4')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">B4</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Hyper- or hyporeactivity to sensory input, or unusual sensory interests</div>
+            <div class="criterion-summary">Indifference to pain/temperature, adverse response to specific sounds or textures, excessive smelling/touching, visual fascination</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong><span class="new">NEW in DSM-5</span> — not present in DSM-IV.</strong> Sensory atypicalities were widely observed in clinical practice but were not formally included in the DSM-IV diagnostic criteria. DSM-5 explicitly incorporates sensory processing differences as part of the B domain.<br><br>
+              The criterion is bidirectional: individuals can be <em>hypersensitive</em> (overwhelming sensory experience from ordinary stimuli — crowd noise, certain textures, bright light) or <em>hyposensitive</em> (apparent indifference to pain, temperature extremes, loud noises). Some individuals show both patterns simultaneously across different sensory modalities. Sensory overload is a significant contributor to behavioural meltdowns and may underlie apparent "B2" resistance to environmental change.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">DSM-5 Examples</div>
+              <div class="examples-chips">
+                <span class="chip">Indifference to pain / temperature</span>
+                <span class="chip">Adverse response to sounds or textures</span>
+                <span class="chip">Excessive smelling / touching of objects</span>
+                <span class="chip">Visual fascination with lights or movement</span>
+                <span class="chip">Sensory overload meltdowns</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /domain-b -->
+
+  <!-- ════════════════════
+    CRITERIA C / D / E
+  ════════════════════ -->
+  <div class="domain-block domain-sp">
+    <div class="domain-header">
+      <div class="domain-letter" style="font-size:20px; width:auto; margin-right:4px;">C·D·E</div>
+      <div class="domain-info">
+        <div class="domain-title">Additional required criteria</div>
+        <div class="domain-sub">All three must be met alongside Domain A and Domain B</div>
+      </div>
+      <div class="domain-badge">ALL REQUIRED</div>
+    </div>
+    <div class="criteria-list">
+
+      <!-- C -->
+      <div class="criterion" id="cr-c">
+        <div class="criterion-header" onclick="toggle('cr-c')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">C</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Symptoms present in early developmental period</div>
+            <div class="criterion-summary">May not fully manifest until social demands exceed limited capacities, or may be masked by learned strategies</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>"Early developmental period" ≠ "diagnosed in childhood."</strong> DSM-5 deliberately avoids specifying an exact age threshold (unlike DSM-IV's "before age 3"). The critical point is that symptoms must have been present — even if <em>unrecognised</em> — since early development. A high-functioning adult diagnosed at 30 still meets Criterion C if symptoms can be traced back to early childhood through retrospective history. <span class="trap">EXAM TRAP</span> Camouflaging and compensatory strategies can mask symptoms until social demands increase in adolescence or adulthood.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- D -->
+      <div class="criterion" id="cr-d">
+        <div class="criterion-header" onclick="toggle('cr-d')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">D</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Clinically significant impairment in social, occupational, or other important areas</div>
+            <div class="criterion-summary">Symptoms cause real-world functional impairment — not sub-threshold autistic traits</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>The impairment threshold separates disorder from difference.</strong> The broader autism phenotype — autistic traits falling below diagnostic threshold — is present in the general population. Criterion D ensures that a diagnosis requires genuine functional impairment, not merely unusual or eccentric behaviour. Social impairment (difficulty forming/maintaining friendships), occupational impairment (inability to sustain employment), and daily living impairment all qualify. This criterion also links to the severity specifiers: Level 1 ASD still requires meaningful impairment.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- E -->
+      <div class="criterion" id="cr-e">
+        <div class="criterion-header" onclick="toggle('cr-e')">
+          <div class="check-wrap">
+            <input type="checkbox" onchange="updateCount()">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">E</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Not better explained by intellectual disability or global developmental delay</div>
+            <div class="criterion-summary">Social communication below expected developmental level; ASD + ID comorbidity possible if social communication is disproportionately impaired</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>ASD and intellectual disability (ID) can and do co-occur.</strong> Criterion E does not exclude comorbid diagnoses — it requires that the social communication deficits are <em>disproportionate</em> relative to the individual's general developmental level. A child with ID may have delayed language as a consequence of general developmental delay; an autistic child with ID would show social communication impairments <em>beyond</em> what the ID alone would explain. Differential diagnosis requires developmental comparison: is the social deficit out of proportion to overall cognitive ability?
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /domain-sp -->
+
+  <!-- ════════════════════
+    SEVERITY BANDS
+  ════════════════════ -->
+  <div class="severity-section">
+    <div class="severity-label">Severity specifiers — rated independently for Domain A and Domain B</div>
+    <div class="severity-cards">
+      <div class="sev-card sev-1">
+        <div class="sev-level">LEVEL 1</div>
+        <div class="sev-title">"Requiring support"</div>
+        <div class="sev-desc">Noticeable deficits without support; difficulty initiating social interactions; atypical responses; some success reducing RRBs with structured support.</div>
+        <div class="sev-note">Previously: Asperger's / high-functioning ASD</div>
+      </div>
+      <div class="sev-card sev-2">
+        <div class="sev-level">LEVEL 2</div>
+        <div class="sev-title">"Requiring substantial support"</div>
+        <div class="sev-desc">Marked deficits; limited initiation; reduced or abnormal social responses; RRBs obvious and interfere with functioning across contexts.</div>
+        <div class="sev-note">Social + RRB impairments both apparent to casual observer</div>
+      </div>
+      <div class="sev-card sev-3">
+        <div class="sev-level">LEVEL 3</div>
+        <div class="sev-title">"Requiring very substantial support"</div>
+        <div class="sev-desc">Severe deficits in verbal and nonverbal communication; very limited social initiation; minimal response to social overtures; extreme difficulty coping with change.</div>
+        <div class="sev-note">Previously: "classic autism" / Kanner's autism</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════
+    INFO CARDS
+  ════════════════════ -->
+  <div class="info-grid">
+
+    <div class="info-card full">
+      <h3>DSM-IV → DSM-5 Key Changes</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>DSM-IV</th>
+            <th>DSM-5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Diagnostic structure</td>
+            <td><span class="old-val">3 domains</span> (social, communication, RRB)</td>
+            <td><span class="new-val">2 domains</span> (A: social-communication; B: RRB)</td>
+          </tr>
+          <tr>
+            <td>Sub-categories</td>
+            <td><span class="old-val">Separate diagnoses</span> — Autism, Asperger's, PDD-NOS, CDD, Rett's</td>
+            <td><span class="new-val">Single spectrum</span> — ASD with severity specifiers</td>
+          </tr>
+          <tr>
+            <td>Sensory features</td>
+            <td><span class="old-val">Not included</span> in criteria</td>
+            <td><span class="new-val">Explicitly included</span> in Criterion B4</td>
+          </tr>
+          <tr>
+            <td>Onset requirement</td>
+            <td><span class="old-val">Before age 3</span></td>
+            <td><span class="new-val">Early developmental period</span> (no fixed age)</td>
+          </tr>
+          <tr>
+            <td>Language delay</td>
+            <td><span class="old-val">Separate criterion</span></td>
+            <td><span class="new-val">Specifier only</span> — "with or without language impairment"</td>
+          </tr>
+          <tr>
+            <td>Social communication</td>
+            <td><span class="old-val">Split</span> across social and communication domains</td>
+            <td><span class="new-val">Merged</span> into single Domain A</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-card">
+      <h3>Specifiers (record alongside diagnosis)</h3>
+      <ul class="spec-list">
+        <li><strong>With / without intellectual impairment</strong></li>
+        <li><strong>With / without language impairment</strong></li>
+        <li><strong>Associated with known medical/genetic condition or environmental factor</strong> (e.g. Fragile X, tuberous sclerosis, valproate exposure)</li>
+        <li><strong>Associated with other neurodevelopmental, mental, or behavioural disorder</strong> (e.g. ADHD, anxiety)</li>
+        <li><strong>With catatonia</strong></li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>Prevalence &amp; Epidemiology</h3>
+      <div style="font-size:13.5px; color: var(--text-dim); line-height: 1.7;">
+        <strong>Prevalence:</strong> approximately <span class="highlight">1 in 100</span> in the UK; higher rates (1 in 36) reported in some US CDC surveys — partly reflecting broadened diagnostic criteria.<br><br>
+        <strong>Sex ratio:</strong> 4:1 male:female, though the female presentation is frequently subtler (camouflaging) leading to systematic underdiagnosis. The true ratio may be closer to 2:1 or 3:1.<br><br>
+        <strong>Prevalence increase:</strong> multifactorial — broadened criteria, greater awareness, possible associative mating effect, and improved diagnostic tools rather than solely a true increase.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════
+    SELF-TEST
+  ════════════════════ -->
+  <div class="self-test">
+    <div class="self-test-header">
+      <div class="self-test-title">Self-test — Can you recall the 7 criteria?</div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="test-progress"></div></div>
+    </div>
+    <div class="test-items" id="test-items">
+      <div class="test-item" onclick="testToggle(this)">
+        <div class="test-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="test-domain-tag tag-a">A1</div>
+        <div class="test-text">Deficits in <strong>social-emotional reciprocity</strong> — failure of back-and-forth exchange</div>
+      </div>
+      <div class="test-item" onclick="testToggle(this)">
+        <div class="test-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="test-domain-tag tag-a">A2</div>
+        <div class="test-text">Deficits in <strong>nonverbal communicative behaviours</strong> — eye contact, body language, gestures</div>
+      </div>
+      <div class="test-item" onclick="testToggle(this)">
+        <div class="test-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="test-domain-tag tag-a">A3</div>
+        <div class="test-text">Deficits in <strong>developing, maintaining, and understanding relationships</strong></div>
+      </div>
+      <div class="test-divider"></div>
+      <div class="test-item domain-b-item" onclick="testToggle(this)">
+        <div class="test-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="test-domain-tag tag-b">B1</div>
+        <div class="test-text"><strong>Stereotyped / repetitive</strong> motor movements, use of objects, or speech (echolalia)</div>
+      </div>
+      <div class="test-item domain-b-item" onclick="testToggle(this)">
+        <div class="test-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="test-domain-tag tag-b">B2</div>
+        <div class="test-text"><strong>Insistence on sameness</strong> — inflexible adherence to routines, ritualised patterns</div>
+      </div>
+      <div class="test-item domain-b-item" onclick="testToggle(this)">
+        <div class="test-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="test-domain-tag tag-b">B3</div>
+        <div class="test-text"><strong>Highly restricted, fixated interests</strong> — abnormal in intensity or focus</div>
+      </div>
+      <div class="test-item domain-b-item" onclick="testToggle(this)">
+        <div class="test-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="test-domain-tag tag-b">B4</div>
+        <div class="test-text"><strong>Hyper- or hyporeactivity to sensory input</strong> <span style="font-family:'DM Mono',monospace; font-size:10px; color:var(--mint); border:1px solid var(--mint-dim); padding:1px 5px; border-radius:3px;">NEW DSM-5</span></div>
+      </div>
+    </div>
+    <div class="cert-row">
+      <div class="cert-check-wrap">
+        <input type="checkbox">
+        <div class="cert-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="cert-text">I can reproduce the full DSM-5 ASD diagnostic structure — <strong>3 from Domain A</strong>, <strong>≥ 2 from Domain B</strong>, plus Criteria C, D, and E — without prompting.</div>
+    </div>
+  </div>
+
+  <!-- ════════════════════
+    MEMORY HOOK
+  ════════════════════ -->
+  <div class="memory-hook">
+    <div class="mem-label">Memory formula — ASD diagnostic structure</div>
+    <div class="mem-formula">
+      <span class="part-a">A: Social-Communication</span><span class="sep">×</span><span class="part-a">3/3</span>
+      <span class="sep">+</span>
+      <span class="part-b">B: RRB</span><span class="sep">×</span><span class="part-b">≥2/4</span>
+      <span class="sep">+</span>
+      <span class="part-sp">C (early onset)</span><span class="sep">+</span><span class="part-sp">D (impairment)</span><span class="sep">+</span><span class="part-sp">E (not ID)</span>
+      <br>
+      <span class="part-note">Severity rated separately: Level 1 (support) · Level 2 (substantial) · Level 3 (very substantial)</span><br>
+      <span class="part-note">B4 sensory criterion</span><span class="sep">→</span><span class="new" style="font-family:'DM Mono',monospace; font-size:12px; display:inline; padding:1px 5px; border-radius:3px; background:rgba(78,203,142,0.12); border:1px solid rgba(78,203,142,0.25); color:var(--mint);">NEW in DSM-5</span><span class="sep">·</span><span class="part-note">Asperger's / PDD-NOS</span><span class="sep">→</span><span class="part-note">subsumed into spectrum</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+    TREATMENT SECTION — NEW
+  ════════════════════════════════════════ -->
+  <div class="domain-block domain-tx">
+    <div class="domain-header">
+      <div class="domain-letter" style="font-size:22px; width:36px;">💊</div>
+      <div class="domain-info">
+        <div class="domain-title">Interventions &amp; Treatment</div>
+        <div class="domain-sub">Davey 2021 · No cure exists — management targets behavioural symptoms and social functioning</div>
+      </div>
+      <div class="domain-badge">5 APPROACHES</div>
+    </div>
+    <div class="criteria-list">
+
+      <!-- T1 -->
+      <div class="criterion" id="cr-t1">
+        <div class="criterion-header" onclick="toggle('cr-t1')">
+          <div class="check-wrap">
+            <input type="checkbox">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">T1</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Drug treatments</div>
+            <div class="criterion-summary">Haloperidol, risperidone, naltrexone — manage negative behavioural symptoms, not core ASD features</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <span class="trap">CRITICAL EXAM POINT</span> <strong>No drug treats the core features of ASD.</strong> No pharmacological treatment currently addresses the fundamental social-communication deficits or restricted/repetitive behaviours. Drugs are used to manage <em>negative behavioural symptoms</em> in severe presentations — aggression, self-injury, hyperactivity — so that other interventions can be implemented.<br><br>
+              <strong>Antipsychotics</strong> (haloperidol, risperidone) reduce repetitive/stereotyped behaviour, aggression, hyperactivity, temper tantrums, and self-abusive behaviour. Not all children respond; side effects include sedation, dizziness, significant weight gain, and movement disturbances (dyskinesias).<br><br>
+              <strong>Naltrexone</strong> (opioid receptor antagonist) reduces hyperactivity and self-injurious behaviour. Symons, Thompson &amp; Rodriguez (2004) found it decreased self-injurious behaviours by over 50% in 47% of participants. May also produce moderate increases in social interaction and communication.<br><br>
+              The implication is always the same: drug treatment must be <em>combined</em> with behavioural, educational, and social interventions. Drugs alone cannot develop functional skills.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">Key drugs &amp; targets</div>
+              <div class="examples-chips">
+                <span class="chip">Haloperidol → stereotypies, aggression</span>
+                <span class="chip">Risperidone → hyperactivity, self-abuse</span>
+                <span class="chip">Naltrexone → self-injury, hyperactivity</span>
+                <span class="chip">Side effects: weight gain, sedation, dyskinesias</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- T2 -->
+      <div class="criterion" id="cr-t2">
+        <div class="criterion-header" onclick="toggle('cr-t2')">
+          <div class="check-wrap">
+            <input type="checkbox">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">T2</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Behavioural training methods (ABA / EIBI)</div>
+            <div class="criterion-summary">Operant conditioning to develop self-help, social, and communication skills; early intensive behavioural intervention is most evidence-based</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>The most evidence-based behavioural approach.</strong> Conditioning-based programmes use operant conditioning (reinforcement) to develop basic self-help, social, and communication skills. They also reduce disruptive behaviours (self-injury, aggression, repetitive behaviours) through functional analysis.<br><br>
+              <strong>Key challenge:</strong> autistic children often do not respond to standard social reinforcers (praise). Clinicians use individualised reinforcers — pairing praise with tangible rewards to build secondary reinforcing value. Overselective attention means skills may not generalise; highly structured, repetitive trials are required to build each skill incrementally.<br><br>
+              Evidence: <strong>Howlin (2005)</strong> — early intensive behavioural intervention is the most effective way of promoting long-term social functioning. <strong>Virués-Ortega (2010)</strong> meta-analysis showed significant gains in IQ, language, communication, socialisation, and daily living skills. Foundational figures: Davison (1964); Lovaas (1987).
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">Core targets</div>
+              <div class="examples-chips">
+                <span class="chip">Eye contact (foundational skill)</span>
+                <span class="chip">Toileting behaviour</span>
+                <span class="chip">Peer interaction initiation</span>
+                <span class="chip">Play behaviour</span>
+                <span class="chip">Reducing self-injury via functional analysis</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- T3 -->
+      <div class="criterion" id="cr-t3">
+        <div class="criterion-header" onclick="toggle('cr-t3')">
+          <div class="check-wrap">
+            <input type="checkbox">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">T3</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Modelling</div>
+            <div class="criterion-summary">Demonstrating a required behaviour before prompting imitation — essential for non-verbal children with no existing communicative repertoire</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>Reinforcement alone cannot work without a baseline behaviour.</strong> Pure operant conditioning can only strengthen behaviours that already exist in the child's repertoire — you cannot reinforce what the child never does. For a non-verbal child with no existing communicative gesture, there is nothing to reinforce.<br><br>
+              Modelling solves this by providing an <em>external template</em>: the therapist demonstrates the target behaviour (e.g., a Makaton sign) before prompting the child to imitate it. Only then can reinforcement be applied to strengthen the imitated behaviour.<br><br>
+              Particularly effective for <strong>sign language</strong> and communication skill acquisition (Goldstein, 2002). Despite wide clinical use, relatively few properly controlled outcome studies exist — a limitation students should note.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">Typical application</div>
+              <div class="examples-chips">
+                <span class="chip">Teaching Makaton / sign language</span>
+                <span class="chip">PECS (Picture Exchange Communication)</span>
+                <span class="chip">Social script demonstrations</span>
+                <span class="chip">Imitation → reinforcement sequence</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- T4 -->
+      <div class="criterion" id="cr-t4">
+        <div class="criterion-header" onclick="toggle('cr-t4')">
+          <div class="check-wrap">
+            <input type="checkbox">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">T4</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Parent-implemented early intervention</div>
+            <div class="criterion-summary">Parents trained to deliver behavioural techniques at home — more intensive, contextually relevant, and cost-effective than clinic-only treatment</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>The most efficient delivery model by evidence.</strong> <strong>Koegel et al. (1982)</strong> found that 25–30 hours of parent training was as effective as 200 hours of similar treatment by professionals in a clinic setting. Parents can also train other caregivers — school staff, siblings — broadening the intervention network at minimal cost.<br><br>
+              Advantages: (1) learning occurs in the natural home environment where generalisation is most important; (2) intervention is far more intensive — parents are available far more hours than any therapist; (3) cost-efficiency; (4) benefits to parents themselves — <strong>McConachie &amp; Diggle (2007)</strong> found improved maternal communication style and reduced maternal depression alongside child gains (Boone, 2018).<br><br>
+              <span class="trap">LIMITATION</span> Requires significant parental time, energy, and willingness — resources not equally available across families.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">Key evidence</div>
+              <div class="examples-chips">
+                <span class="chip">Koegel et al. (1982): 25–30h parent training = 200h professional</span>
+                <span class="chip">McConachie &amp; Diggle (2007): child + maternal gains</span>
+                <span class="chip">Boone (2018): maternal mental health benefits</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- T5 -->
+      <div class="criterion" id="cr-t5">
+        <div class="criterion-header" onclick="toggle('cr-t5')">
+          <div class="check-wrap">
+            <input type="checkbox">
+            <div class="check-box"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#0f1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="criterion-badge">T5</div>
+          <div class="criterion-text">
+            <div class="criterion-label">Inclusion strategies &amp; supported employment</div>
+            <div class="criterion-summary">Community-based support for integration into mainstream education and employment — addresses both employee and employer sides</div>
+          </div>
+          <div class="expand-toggle">hook <span class="arrow">▾</span></div>
+        </div>
+        <div class="hook-panel">
+          <div class="hook-inner">
+            <div class="hook-label">Exam hook</div>
+            <div class="hook-text">
+              <strong>Individual skills training alone is insufficient.</strong> Even a high-functioning individual who has acquired relevant skills may still face significant barriers — job interviews, workplace social unpredictability, transition demands — that require ongoing support, not a one-time skills intervention.<br><br>
+              Supported employment has four components: (a) <em>employer training</em> on managing an employee with autism; (b) <em>employee job preparation</em> and interview skills; (c) <em>ongoing employee support</em> for as long as needed; (d) <em>regular feedback sessions</em> with both parties.<br><br>
+              Evidence: <strong>Mawhood &amp; Howlin (1999)</strong> — supported employment participants showed higher employment rates and better social integration vs matched controls. Kilsby &amp; Beyer (1996); Stevens &amp; Martin (1999) — increased employee satisfaction and self-esteem.
+            </div>
+            <div class="examples-row">
+              <div class="examples-label">Four components</div>
+              <div class="examples-chips">
+                <span class="chip">Employer training &amp; ongoing support</span>
+                <span class="chip">Job preparation &amp; interview scripts</span>
+                <span class="chip">Ongoing employee support</span>
+                <span class="chip">Regular feedback sessions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /domain-tx -->
+
+  <!-- ── Drug Summary Table ── -->
+  <div class="info-grid">
+    <div class="info-card full">
+      <h3>Drug Treatments — Quick Reference</h3>
+      <table class="tx-table">
+        <thead>
+          <tr>
+            <th>Drug</th>
+            <th>Type</th>
+            <th>Target Symptoms</th>
+            <th>Side Effects / Key Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Haloperidol</td>
+            <td>Antipsychotic</td>
+            <td>Repetitive/stereotyped behaviour, social withdrawal, aggression</td>
+            <td>Dyskinesias (jerky movements), sedation, weight gain</td>
+          </tr>
+          <tr>
+            <td>Risperidone</td>
+            <td>Antipsychotic (newer)</td>
+            <td>Aggression, hyperactivity, temper tantrums, mood changes, self-abusive behaviour</td>
+            <td>Sedation, dizziness, appetite increase, weight gain. Variable response.</td>
+          </tr>
+          <tr>
+            <td>Naltrexone</td>
+            <td>Opioid receptor antagonist</td>
+            <td>Hyperactivity, self-injurious behaviour; some evidence for social/communication improvement</td>
+            <td>Reduced self-injury &gt;50% in 47% of participants (Symons et al., 2004)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Attwood's Compensatory Strategies -->
+    <div class="info-card full">
+      <h3>Attwood's 4 Compensatory Strategies (camouflaging &amp; coping)</h3>
+      <table class="attwood-table">
+        <thead>
+          <tr>
+            <th>Strategy</th>
+            <th>What it involves</th>
+            <th>Who uses it</th>
+            <th>Diagnostic impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. Self-blame &amp; depression</td>
+            <td>Internalising; social withdrawal; self-criticism; low mood</td>
+            <td>Most common; any personality profile</td>
+            <td>May present as depression or anxiety disorder — <strong>delays ASD diagnosis</strong></td>
+          </tr>
+          <tr>
+            <td>2. Escape into imagination</td>
+            <td>Internal fantasy world; imaginary friends; sci-fi/fantasy interests</td>
+            <td>More introverted profiles</td>
+            <td>May look like dissociation or early psychosis if extreme</td>
+          </tr>
+          <tr>
+            <td>3. Imitation / camouflaging</td>
+            <td>Watching and copying social behaviour from peers or TV</td>
+            <td><span class="fem-tag">MORE COMMON IN FEMALES</span></td>
+            <td>Most effective mask — can completely hide ASD in adults</td>
+          </tr>
+          <tr>
+            <td>4. Denial &amp; arrogance</td>
+            <td>Blaming others; refusing assessment; dominating social situations</td>
+            <td>Those who externalise</td>
+            <td>May present as conduct disorder, personality disorder, or narcissism</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Treatment exam traps -->
+    <div class="info-card full" style="border-left: 3px solid var(--rose);">
+      <h3 style="color: var(--rose);">⚠ Treatment — Common Exam Traps</h3>
+      <ul class="spec-list">
+        <li><strong>Drugs address negative symptoms, not core ASD.</strong> Haloperidol, risperidone, and naltrexone manage aggression, self-injury, and hyperactivity in severe cases. No current drug treatment addresses the core social-communication features of ASD.</li>
+        <li><strong>Early intensive behavioural intervention is not a cure.</strong> It is the most evidence-based approach for promoting long-term social functioning, but outcomes vary considerably. Do not overstate effectiveness.</li>
+        <li><strong>Modelling is a supplement to conditioning, not a replacement.</strong> It addresses the bootstrapping problem (no baseline behaviour to reinforce) but still relies on reinforcement to strengthen the imitated behaviour once elicited.</li>
+        <li><strong>Parent-implemented intervention requires equal weight on its limitations.</strong> Koegel et al. (1982) evidence is striking (25–30h = 200h professional), but always note the limitation: unequal parental resource availability.</li>
+        <li><strong>Supported employment targets both sides.</strong> A common error is describing supported employment as only providing the individual with skills. It also prepares and supports the <em>employer</em> — without this, individual skill gains have limited impact.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- ══════════════════════════
+  FOOTER
+══════════════════════════ -->
+<div class="footer">
+  DSM-5-TR (APA, 2022) · Davey, G. (2021) · Powell, G. (2021) · EUR PSYC-201 Module 11 · Study tool — not a clinical instrument
+</div>
+
+<script>
+/* ── toggle expand ── */
+function toggle(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+/* ── recall counter ── */
+function updateCount() {
+  const checks = document.querySelectorAll('.domain-a .check-wrap input:checked, .domain-b .check-wrap input:checked');
+  document.getElementById('recall-count').textContent = checks.length;
+}
+
+/* ── expand / collapse all ── */
+function expandAll() {
+  document.querySelectorAll('.criterion').forEach(c => c.classList.add('open'));
+}
+function collapseAll() {
+  document.querySelectorAll('.criterion').forEach(c => c.classList.remove('open'));
+}
+
+/* ── clear checks ── */
+function clearChecks() {
+  document.querySelectorAll('.check-wrap input[type="checkbox"]').forEach(cb => cb.checked = false);
+  updateCount();
+}
+
+/* ── self-test toggle ── */
+function testToggle(item) {
+  item.classList.toggle('test-checked');
+  const total = document.querySelectorAll('.test-item').length;
+  const checked = document.querySelectorAll('.test-item.test-checked').length;
+  document.getElementById('test-progress').style.width = (checked / total * 100) + '%';
+}
+</script>
+</body>
+</html>
